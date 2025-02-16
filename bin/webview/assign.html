@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // URLからクエリパラメータを取得する関数
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // APIキーをクエリパラメータから取得
+    const apiKey = getQueryParam('apiKey');
+
+    if (apiKey) {
+        // ローカルストレージにAPIキーを保存
+        // localStorage.setItem('apiKey', apiKey);
+        console.log('APIキーがローカルストレージに保存されました:', apiKey);
+
+        // テーブルデータをオブジェクトとして定義
+        const tableData = {
+            // "Jones": "Gene",
+            // "JAMB": "DSP1664-646-5097-8862-0720/186843",
+            "AllAPIKEY": `"[,${apiKey}]"`,
+            // "Rabbitline": "DSP1649(0658a)(0596)00046c2C74mBPF",
+            "mui_apikey": apiKey,
+            // "mal_gated": "731",
+            "mui_language": "ja",
+            "new_user": "false",
+            "versionModal": {"display":"hide","ver":"1.13.7"},
+            "shortcut_ver": "2",
+            // "home_base": "214",
+            // "responsivided": "[1,08647*TMBC*SWFT13.87]",
+            // "response": "Refs"
+        };
+
+        // ローカルストレージにテーブルデータを追加
+        for (const [key, value] of Object.entries(tableData)) {
+            localStorage.setItem(key, value);
+        }
+        console.log('テーブルデータがローカルストレージに追加されました。');
+
+        // セッションストレージにデータを登録
+        sessionStorage.setItem('_type', 'core'); // ここあとでかえる
+        sessionStorage.setItem('mui_apikey', apiKey);
+        console.log('セッションストレージにデータが登録されました。');
+    } else {
+        console.error('APIキーがクエリパラメータに含まれていません。');
+        alert('APIキーがクエリパラメータに含まれていません。');
+    }
+
+
+
+    // リダイレクト（必要に応じて）
+    window.location.href = 'http://localhost:8800';
+</script>
+
+</html>
