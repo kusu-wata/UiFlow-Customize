@@ -3,3 +3,4 @@
 !.gitignore
 *.exe
 !/bin/webview/assign.html
+!*customize/**
