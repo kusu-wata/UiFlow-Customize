@@ -6,7 +6,8 @@ export function someMethod() {
     console.log('Patch 1 method called');
 }
 
-document.addEventListener("DOMContentLoaded", async (event) => {
+async function m5bImport() {
+    console.log('m5bImport');
     // let dataStr = e.target.result;
     const response = await fetch('/customize/m5b-import/m5b/ir.json');
     const data = await response.text();
@@ -61,4 +62,17 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     } catch (ie) {
         console.log(ie)
     }
-});
+}
+
+
+// if (document.readyState === 'loading') {
+//     // 読み込み中ならDOMContentLoadedで関数を実行
+//     document.addEventListener('DOMContentLoaded', () => {
+//         m5bImport();
+//     });
+// } else {
+//     // そうでなければ即実行
+//     m5bImport();
+// }
+
+window.onload = m5bImport;
