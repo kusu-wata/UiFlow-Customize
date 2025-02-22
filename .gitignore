@@ -5,3 +5,4 @@
 !/bin/webview/assign.html
 !*customize/**
 !*.py
+!main*
