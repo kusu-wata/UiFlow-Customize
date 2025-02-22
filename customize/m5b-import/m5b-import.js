@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             , toolboxDom = document.getElementById(opts.toolboxId);
         // let data = JSON.parse(dataStr)
         //     , toolboxDom = document.getElementById('wrapper_blockly_toolbox');
-        alert("addThirdParty")
+        // alert("addThirdParty")
         eval(data.jscode),
             toolboxDom.children[toolboxDom.children.length - 1].append(window.Blockly.Xml.textToDom(`<category name="${data.category}" colour="${data.color}">${data.blocks.map(e => `<block type="${e}"></block>`).join("")}</category>`));
         let tempBlock = window.Blockly.Xml.workspaceToDom(window.BlocklyEditor);
