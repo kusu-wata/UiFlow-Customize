@@ -2,7 +2,8 @@
 const patchConfig = {
     enabledPatches: [
       'patch1.js',
-      'm5b-import/m5b-import.js'
+      'm5b-import/m5b-import.js',
+      'qrcode-reader/qr-reader.js',
     ]
   };
   

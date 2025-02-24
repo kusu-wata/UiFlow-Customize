@@ -14,6 +14,9 @@ async function m5bImport() {
     let dataStr = data;
     // let _this = this;
     try {
+        if (typeof window.BlocklyEditorService === 'undefined') {
+            alert('BlocklyEditorService is not defined');
+        }
         let _this = window.BlocklyEditorService;
         let opts = BlocklyEditorServiceInitE;
         console.log(_this);
@@ -64,15 +67,71 @@ async function m5bImport() {
     }
 }
 
-
-// if (document.readyState === 'loading') {
-//     // 読み込み中ならDOMContentLoadedで関数を実行
-//     document.addEventListener('DOMContentLoaded', () => {
-//         m5bImport();
-//     });
-// } else {
-//     // そうでなければ即実行
+// setTimeout(() => {
 //     m5bImport();
+// }, 5000
+// );
+
+
+if (document.readyState === 'loading') {
+    // 読み込み中ならDOMContentLoadedで関数を実行
+    document.addEventListener('DOMContentLoaded', () => {
+        m5bImport();
+    });
+} else {
+    // そうでなければ即実行
+    m5bImport();
+}
+
+// document.addEventListener('DOMContentLoaded', m5bImport);
+
+//     // ページ再表示時にも初期化
+//     window.addEventListener('pageshow', function(event) {
+//         // if (event.persisted) {
+//             m5bImport();
+//         // }
+//     });
+
+// avatar
+
+// history.replaceState(null, document.getElementsByTagName('title')[0].innerHTML, null);
+// window.addEventListener('popstate', function (e) {
+//     this.alert("popstates");
+//     m5bImport()
+// });
+
+// // イベントリスナーを設定
+// let isfirst = false;
+// window.addEventListener('testChanged', function(e) {
+//     alert("aaaaaaaas")
+//     // console.log('window.testが変更されました:', e.detail);
+//    if (isfirst == false) {
+//     m5bImport();
+//     isfirst = true;
+//    }
+
+// });
+
+// // プロパティを監視する関数
+// function watchTest() {
+//     let originalValue = window.BlocklyEditorService;
+//     alert("watchstart")
+    
+//     Object.defineProperty(window, 'BlocklyEditorService', {
+//         set: function(newValue) {
+//             // カスタムイベントを発火
+//             const event = new CustomEvent('testChanged', { 
+//                 detail: newValue 
+//             });
+//             window.dispatchEvent(event);
+            
+//             originalValue = newValue;
+//         },
+//         get: function() {
+//             return originalValue;
+//         }
+//     });
 // }
 
-window.onload = m5bImport;
+// // 監視を開始
+// watchTest();

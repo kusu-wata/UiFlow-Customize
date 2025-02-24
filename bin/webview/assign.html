@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Assignment</title>
+</head>
+<body>
+    <div id="message"></div>
+</body>
+<script type="module">
+    import ApiKeyManager from './customize/apiKeyManager.js';
+
+    // URLからクエリパラメータを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const apiKey = urlParams.get('apiKey');
+
+    if (apiKey) {
+        if (ApiKeyManager.registerApiKey(apiKey)) {
+            document.getElementById('message').textContent = 'APIキーが正常に登録されました。';
+            // リダイレクト
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        } else {
+            document.getElementById('message').textContent = 'APIキーの登録に失敗しました。';
+        }
+    } else {
+        document.getElementById('message').textContent = 'APIキーがクエリパラメータに含まれていません。';
+    }
+</script>
+</html>
