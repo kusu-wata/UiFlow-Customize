@@ -6,7 +6,19 @@ export function someMethod() {
     console.log('Patch 1 method called');
 }
 
+let isfirst = false;
+
 async function m5bImport() {
+    if (typeof window.BlocklyEditorService === 'undefined') {
+        alert('BlocklyEditorService is not defined');
+        return;
+    }
+
+    if (isfirst) {
+        return;
+    }
+    isfirst = true;
+
     console.log('m5bImport');
     // let dataStr = e.target.result;
     const response = await fetch('/customize/m5b-import/m5b/ir.json');
@@ -14,9 +26,7 @@ async function m5bImport() {
     let dataStr = data;
     // let _this = this;
     try {
-        if (typeof window.BlocklyEditorService === 'undefined') {
-            alert('BlocklyEditorService is not defined');
-        }
+        
         let _this = window.BlocklyEditorService;
         let opts = BlocklyEditorServiceInitE;
         console.log(_this);
@@ -73,15 +83,15 @@ async function m5bImport() {
 // );
 
 
-if (document.readyState === 'loading') {
-    // 読み込み中ならDOMContentLoadedで関数を実行
-    document.addEventListener('DOMContentLoaded', () => {
-        m5bImport();
-    });
-} else {
-    // そうでなければ即実行
-    m5bImport();
-}
+// if (document.readyState === 'loading') {
+//     // 読み込み中ならDOMContentLoadedで関数を実行
+//     document.addEventListener('DOMContentLoaded', () => {
+//         m5bImport();
+//     });
+// } else {
+//     // そうでなければ即実行
+//     m5bImport();
+// }
 
 // document.addEventListener('DOMContentLoaded', m5bImport);
 
@@ -135,3 +145,33 @@ if (document.readyState === 'loading') {
 
 // // 監視を開始
 // watchTest();
+
+
+window.addEventListener("BlocklyEditorService", function (e) {
+    console.log('BlocklyEditorService changed');
+    setTimeout(() => {
+        m5bImport();
+    },1000);
+});
+
+function checkm5bloaded() {
+    setTimeout(() => {
+        if(isfirst == false){
+            if (typeof window.BlocklyEditorService === 'undefined') {
+                checkm5bloaded();
+            } else {
+                m5bImport();
+            }
+        }
+    }, 5000)
+}
+
+if (document.readyState === 'loading') {
+        // 読み込み中ならDOMContentLoadedで関数を実行
+        document.addEventListener('DOMContentLoaded', () => {
+            checkm5bloaded();
+        });
+    } else {
+        // そうでなければ即実行
+        checkm5bloaded();
+    }
