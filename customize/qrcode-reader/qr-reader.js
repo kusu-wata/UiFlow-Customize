@@ -148,4 +148,4 @@ class QRReader {
 }
 
 // QRReaderのインスタンスを作成
-// const qrReader = new QRReader();
+const qrReader = new QRReader();

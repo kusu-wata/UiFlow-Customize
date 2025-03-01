@@ -71,7 +71,7 @@
     z-index: 10000;
 }
 
-#start-btn {
+/* #start-btn {
     position: relative;
     z-index: 9997;
     padding: 10px 20px;
@@ -86,7 +86,39 @@
 
 #start-btn:hover {
     background: #0056b3;
-}
+} */
+ 
+.floating-button {
+    position: fixed;
+    bottom: 160px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000; /* Ensures button appears above other elements */
+    border: none;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .floating-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+
+  .floating-button:active {
+    transform: scale(0.95);
+  }
+
+  .floating-button i {
+    font-size: 24px;
+  }
 
 @keyframes fadeIn {
     from { opacity: 0; }
